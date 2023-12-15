@@ -46,39 +46,3 @@
 |  gcForest (without multi-grained forests)  |    80.00%    |
 | gcForest (with multi-grained forests, i=8) |    88.75%    |
 
-## run
-### Dependencies ###
-* [gcForest](https://github.com/kingfengji/gcForest) <br>
-* [AutoKeras](https://github.com/jhfjhfj1/autokeras) <br>
-Currently, Auto-Keras is only compatible with: Python 3.6. And we need to install the depedencies under python3. [2019.5.10]
-* others
-    
-      pip install -r requirements.txt
-### run ###
-~~~
-# read README.md in models folder and download weight file of pre-trained VGG on the ImageNet dataset.
-# dataset
-cp -rf normal_add/* ./normal
-rm -rf normal_add/
-cp -rf defect_add/* ./defect
-rm -rf defect_add
-# CNN+SVM(rbf kernel)
-python cnnSVM.py
-# simple CNN(3 Conv+1 FC)
-python CNNclassifier.py
-# transfer Learning(VGG16)
-python transferLearning.py
-# gcForest (without multi-grained forests) 
-python ./data/train/write_label.py
-python ./data/test/write_label.py
-python ./gcForest/demo_Defect-Detection-Classifier.py --model ./gcForest/demo_Defect-Detection-Classifier-ca.json
-# gcForest (with multi-grained forests, i=8) 
-python ./gcForest/demo_Defect-Detection-Classifier.py --model ./gcForest/demo_Defect-Detection-Classifier-gc8.json
-# Neural Network Search, copy autokeras dir to current path after it is installed from source.
-python ./data/train/write_label2.py
-python ./data/test/write_label2.py
-python3 autoCNNclassifier.py
-~~~
-## reference
-[scikit-learn tutorial](http://scikit-learn.org/dev/modules/generated/sklearn.svm.SVC.html) </br>
-[Building powerful image classification models using very little data](https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html)
